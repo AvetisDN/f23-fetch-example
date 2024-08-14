@@ -72,6 +72,7 @@ loadMoreButton.addEventListener("click", (event) => {
 
 selectLimit.addEventListener("change", (event) => {
   freshRender = true;
+  current = 1;
   limit = +event.currentTarget.value;
   skip = 0;
   fetchData();
