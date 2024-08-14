@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer components {
+  html,
+  body {
+    @apply scroll-smooth;
+  }
+
   .product-card {
     @apply bg-gray-900 rounded-xl relative flex flex-col;
     .brand {
@@ -12,7 +17,7 @@
       @apply aspect-square w-full object-cover object-center bg-gray-800 rounded-t-lg p-4 pt-6;
     }
     h2 {
-      @apply font-bold text-2xl text-teal-400;
+      @apply font-bold text-xl text-teal-300;
     }
     .content {
       @apply p-4  flex flex-col gap-4 grow;
@@ -20,13 +25,94 @@
     .data {
       @apply flex items-center justify-between mt-auto;
       .price {
-        @apply text-lg font-extrabold;
+        @apply text-lg font-bold;
       }
       .rating {
-        @apply flex gap-3 items-center text-gray-400;
+        @apply flex gap-1 items-center text-gray-400;
         .rating-stars {
-          @apply text-sm text-amber-300;
+          @apply text-sm text-amber-300 flex;
         }
+      }
+    }
+  }
+
+  .load-more {
+    @apply bg-teal-500 text-teal-50 text-2xl flex items-center gap-2 font-medium py-4 px-6 rounded-xl leading-none;
+
+    .lds-ring,
+    .lds-text {
+      @apply hidden;
+    }
+
+    &.loading {
+      .lds-ring,
+      .lds-text {
+        @apply block;
+      }
+      .lds-label {
+        @apply hidden;
+      }
+    }
+  }
+
+  /* LOADING ANIMATION */
+
+  .lds-ring,
+  .lds-ring div {
+    box-sizing: border-box;
+  }
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 4px solid currentColor;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: currentColor transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* PAGINATION */
+
+  .pagination > div {
+    @apply flex items-center gap-2;
+    button {
+      @apply bg-gray-800 w-12 h-12 flex items-center justify-center font-bold text-lg leading-none rounded text-teal-50;
+      &.current {
+        @apply bg-teal-600;
+      }
+      &:disabled {
+        @apply opacity-40 pointer-events-none;
+      }
+      &.page-next {
+        @apply ml-3;
+      }
+      &.page-prev {
+        @apply mr-3;
       }
     }
   }
